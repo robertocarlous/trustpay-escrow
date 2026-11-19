@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 import { Milestone, Project } from '@/types';
 import { ImageLightboxModal } from '@/components/ImageLightboxModal';
 import { ProjectDetailSkeleton } from '@/components/skeletons';
+import { ProjectAuditLog } from '@/components/ProjectAuditLog';
+import { CalendarExportButton } from '@/components/CalendarExportButton';
 import { useWalletStore } from '@/store/walletStore';
 import { authFetch } from '@/lib/api';
 import { SUPPORTED_TOKENS } from '@/config/tokens';
@@ -672,6 +674,8 @@ export default function ProjectDetailsPage() {
             >
               {project.status.replace('_', ' ')}
             </span>
+
+            <CalendarExportButton project={project} />
           </div>
         </div>
 
@@ -734,6 +738,8 @@ export default function ProjectDetailsPage() {
               </span>
             </div>
           </div>
+
+          <ProjectAuditLog project={project} />
 
           {/* On-Chain Deposit Callout if project has not been locked on-chain yet */}
           {!hasOnChainEscrow && isClient && (
